@@ -142,20 +142,20 @@ public class RelayConnection: NSObject {
     }
     
     func onConnection() {
+        self.delegate?.didConnect(relayUrl: self.relayUrl)
         self.connected = true
         DispatchQueue.main.async {
             self.startPing()
         }
         self.subscribe()
-        self.delegate?.didConnect(relayUrl: self.relayUrl)
     }
     
     func onDisconnection() {
+        self.delegate?.didDisconnect(relayUrl: self.relayUrl)
         self.connected = false
         DispatchQueue.main.async {
             self.stopPing()
         }
-        self.delegate?.didDisconnect(relayUrl: self.relayUrl)
     }
 }
 
