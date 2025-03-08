@@ -148,6 +148,7 @@ public class RelayConnection: NSObject {
             self.startPing()
         }
         self.subscribe()
+        
     }
     
     func onDisconnection() {
@@ -156,6 +157,7 @@ public class RelayConnection: NSObject {
         DispatchQueue.main.async {
             self.stopPing()
         }
+        
     }
 }
 
@@ -168,13 +170,14 @@ public protocol RelayConnectionDelegate: AnyObject {
 extension  RelayConnection: URLSessionWebSocketDelegate {
     
     public func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
-        print("Connected to relay: \(self.relayUrl)")
         onConnection()
+        print("Connected to relay: \(self.relayUrl)")
     }
     
     public func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
-        print("Disconnected from relay: \(self.relayUrl)")
         onDisconnection()
+        print("Disconnected from relay: \(self.relayUrl)")
+        
     }
     
 }
