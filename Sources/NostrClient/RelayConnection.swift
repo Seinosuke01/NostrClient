@@ -131,6 +131,7 @@ public class RelayConnection: NSObject {
     
     func subscribe(with subscription: Subscription) {
         if connected {
+            print("ここまできてるconnect")
             if let clientMessage = try? ClientMessage.subscribe(subscription).string() {
                 self.send(text: clientMessage)
             }
@@ -139,6 +140,7 @@ public class RelayConnection: NSObject {
     
     func unsubscribe(withId id: String) {
         if !connected {
+            print("ここまできてるdisconnect")
             if let clientMessage = try? ClientMessage.unsubscribe(id).string() {
                 self.send(text: clientMessage)
             }
