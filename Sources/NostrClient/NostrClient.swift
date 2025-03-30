@@ -89,7 +89,7 @@ public class NostrClient: ObservableObject {
     public func remove(relayWithUrl relayUrl: String) {
         if let indexOf = self.relayConnections.firstIndex(where: { $0.relayUrl == relayUrl }) {
             self.relayConnections[indexOf].disconnect()
-            self.relayConnections[indexOf].delegate = nil
+//            self.relayConnections[indexOf].delegate = nil   
             self.relayConnections.remove(at: indexOf)
         }
     }

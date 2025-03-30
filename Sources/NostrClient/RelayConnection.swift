@@ -157,7 +157,6 @@ public class RelayConnection: NSObject {
     }
     
     func onDisconnection() {
-        print("ほいさ")
         print("self.delegate: \(String(describing: self.delegate))")
         self.delegate?.didDisconnect(relayUrl: self.relayUrl)
         self.connected = false
