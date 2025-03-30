@@ -129,17 +129,17 @@ public class RelayConnection: NSObject {
         }
     }
     
-    func unsubscribe(withId id: String) {
+    func subscribe(with subscription: Subscription) {
         if connected {
-            if let clientMessage = try? ClientMessage.unsubscribe(id).string() {
+            if let clientMessage = try? ClientMessage.subscribe(subscription).string() {
                 self.send(text: clientMessage)
             }
         }
     }
     
-    func subscribe(with subscription: Subscription) {
-        if connected {
-            if let clientMessage = try? ClientMessage.subscribe(subscription).string() {
+    func unsubscribe(withId id: String) {
+        if !connected {
+            if let clientMessage = try? ClientMessage.unsubscribe(id).string() {
                 self.send(text: clientMessage)
             }
         }
