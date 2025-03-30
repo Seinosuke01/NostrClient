@@ -28,8 +28,6 @@ public class RelayConnection: NSObject {
     }
     
     public func connect() {
-        print("コネクト確認")
-        print("connected: \(connected)")
         if !connected {
             guard let url = URL(string: relayUrl) else { return }
             self.urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
@@ -40,8 +38,6 @@ public class RelayConnection: NSObject {
     }
     
     public func disconnect() {
-        print("ディスコネクト確認")
-        print("connected: \(connected)")
         if connected {
             self.unsubscribe()
             webSocketTask.cancel(with: .goingAway, reason: nil)
@@ -146,7 +142,6 @@ public class RelayConnection: NSObject {
     }
     
     func onConnection() {
-        print("self.delegate: \(String(describing: self.delegate))")
         self.delegate?.didConnect(relayUrl: self.relayUrl)
         self.connected = true
         DispatchQueue.main.async {
@@ -157,7 +152,6 @@ public class RelayConnection: NSObject {
     }
     
     func onDisconnection() {
-        print("self.delegate: \(String(describing: self.delegate))")
         self.delegate?.didDisconnect(relayUrl: self.relayUrl)
         self.connected = false
         DispatchQueue.main.async {
